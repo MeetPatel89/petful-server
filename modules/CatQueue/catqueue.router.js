@@ -1,26 +1,26 @@
 const express = require('express');
 const json = require('body-parser').json();
 
-const dogQueue = require('./dogqueue.service');
+const catQueue = require('./catqueue.service');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
   // Return all the people currently in the queue.
-  return res.status(200).json(dogQueue.get());
+  return res.status(200).json(catQueue.get());
 });
 
 router.post('/', json, (req, res) => {
   // Add a new person to the queue.
   const { person } = req.body;
-  dogQueue.enqueue(person);
+  catQueue.enqueue(person);
   res.status(201).json(person);
 });
 
 router.delete('/', json, (req, res) => {
   const { person } = req.body;
 
-  dogQueue.dequeue(person);
+  catQueue.dequeue(person);
 
   res.json(person);
 });
