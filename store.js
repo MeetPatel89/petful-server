@@ -1,8 +1,8 @@
 module.exports = {
   people: ['Randy Lahey', 'Trevor Cory', 'Jim Lahey'],
-  dogList: ['Randy Lahey', 'Trevor Cory', 'Jim Lahey'],
+  dogQueue: ['Randy Lahey', 'Trevor Cory', 'Jim Lahey'],
 
-  catList: ['Meet Patel', 'Neel Patel', 'Jay Patel'],
+  catQueue: ['Meet Patel', 'Neel Patel', 'Jay Patel'],
 
   dogs: [
     {
