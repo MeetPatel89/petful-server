@@ -20,7 +20,7 @@ router.post('/', json, (req, res) => {
 router.delete('/', json, (req, res) => {
   const { person } = req.body;
 
-  dogList.dequeue(person);
+  dogQueue.dequeue(person);
 
   res.json(person);
 });
