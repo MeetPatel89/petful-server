@@ -2,7 +2,7 @@ const Queue = require('../queue/Queue');
 const store = require('../../store');
 
 const catQueue = new Queue();
-store.catqueue.forEach((person) => catQueue.enqueue(person));
+store.catQueue.forEach((person) => catQueue.enqueue(person));
 
 module.exports = {
   get() {
