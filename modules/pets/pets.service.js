@@ -1,41 +1,23 @@
-const { Queue, displayQ } = require('../queue/Queue');
-const store = require('../../store');
+// const express = require('express');
+// const json = require('body-parser').json();
 
-const kittenQueue = new Queue();
-const doggoQueue = new Queue();
+// const Pets = require('./pets.service');
+// const People = require('../people/people.service');
 
-store.cats.forEach((cat) => kittenQueue.enqueue(cat));
-store.dogs.forEach((dog) => doggoQueue.enqueue(dog));
+// const router = express.Router();
 
-const CatService = {
-  getCats() {
-    const displayCats = displayQ(kittenQueue);
-    return displayCats;
-  },
-  getFirstCat() {
-    return kittenQueue.peek();
-  },
-  adoptCat() {
-    kittenQueue.dequeue();
-    return kittenQueue;
-  },
-};
+// router.get('/', (req, res) => {
+//   // Return all pets currently up for adoption.
+//   return res
+//     .status(200)
+//     .json(Pets.get());
+// });
 
-const DogService = {
-  getDogs() {
-    const displayDogs = displayQ(doggoQueue);
-    return displayDogs;
-  },
-  getFirstDog() {
-    return doggoQueue.peek();
-  },
-  adoptDog() {
-    doggoQueue.dequeue;
-    return doggoQueue;
-  },
-};
+// router.delete('/', json, (req, res) => {
+//   // Remove a pet from adoption.
+//   return res
+//     .status(204)
+//     .json(Pets.dequeue());
+// });
 
-module.exports = {
-  CatService,
-  DogService,
-};
+// module.exports = router;
