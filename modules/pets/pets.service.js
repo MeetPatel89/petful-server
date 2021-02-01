@@ -30,6 +30,13 @@ module.exports = {
     };
     return newCats;
   },
+  getDogs() {
+    // Return the pets next in line to be adopted.
+    let newDogs = {
+      dog: pets.dogs.show(),
+    };
+    return newDogs;
+  },
 
   dequeue(type) {
     // Remove a pet from the queue.
