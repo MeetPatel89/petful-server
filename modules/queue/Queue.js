@@ -1,3 +1,10 @@
+class _Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
 class Queue {
   constructor() {
     // Set initial data.
