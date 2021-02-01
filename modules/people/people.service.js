@@ -1,27 +1,27 @@
-const Queue = require('../queue/Queue');
+const { Queue } = require('../queue/Queue');
+const { displayQ } = require('../queue/Queue');
 const store = require('../../store');
 
-// Set up initial data.
-// --------------------
-
-const people = new Queue();
+let people = new Queue();
 store.people.forEach((person) => people.enqueue(person));
 
 // --------------------
-
-module.exports = {
-  get() {
-    // Return all people in the queue.
-    return people.all();
+const PeopleService = {
+  //return all people in queue
+  getAllPeople() {
+    const displayPeople = displayQ(people);
+    return displayPeople;
   },
-
-  enqueue(name) {
-    // Add a person to the queue.
-    return people.enqueue(name);
+  //add new person to queue
+  newAdopter(name) {
+    people.enqueue(name);
+    return people;
   },
-
-  dequeue(person) {
-    // Remove a person from the queue.
-    return people.dequeue(person);
+  //remove person from queue
+  removeAdopter() {
+    people.dequeue();
+    return people;
   },
 };
+
+module.exports = PeopleService;

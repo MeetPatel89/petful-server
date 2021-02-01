@@ -1,31 +1,48 @@
-const express = require('express')
-const json = require('body-parser').json()
+const express = require('express');
 
-const Pets = require('./pets.service')
+const { CatService, DogService } = require('./pets.service');
+const router = express.Router();
 
-const router = express.Router()
+router
+  .route('/api/cat')
+  .get((req, res, next) => {
+    const cats = CatService.getCats();
+    if (!cats) {
+      return res.status(400).json({
+        error: 'No cats currently available to adopt',
+      });
+    }
+    return res.json(cats);
+  })
+  .delete((req, res, next) => {
+    const cats = CatService.adoptCat();
+    if (!cats) {
+      return res.status(400).json({
+        error: 'No cats currently available to adopt',
+      });
+    }
+    res.status(200).send(cats);
+  });
 
-router.get('/', (req, res) => {
-  // Return all pets currently up for adoption.
-  let results = Pets.get();
-  return res.status(200).json(results);
-})
+router
+  .route('/api/dog')
+  .get((req, res) => {
+    const dogs = DogService.getDogs();
+    if (!dogs) {
+      return res.status(400).json({
+        error: 'Currently no dogs available to adopt',
+      });
+    }
+    return res.json(dogs);
+  })
+  .delete((req, res, next) => {
+    const dogs = DogService.adoptDog();
+    if (!dogs) {
+      return res.status(400).json({
+        error: 'No dogs currently available to adopt.',
+      });
+    }
+    return res.status(200).send(dogs);
+  });
 
-router.get('/dogs', (req, res) => {
-  // Return all pets currently up for adoption.
-  let results = Pets.getDogs();
-  return res.status(200).json(results);
-});
-
-router.get('/cats', (req, res) => {
-  // Return all pets currently up for adoption.
-  let results = Pets.getCats();
-  return res.status(200).json(results);
-});
-
-router.delete('/', json, (req, res) => {
-  // Remove a pet from adoption.
-  return res.status(204).json(Pets.dequeue());
-})
-
-module.exports = router
+module.exports = router;

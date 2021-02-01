@@ -1,50 +1,41 @@
-const Queue = require('../queue/Queue');
+const { Queue, displayQ } = require('../queue/Queue');
 const store = require('../../store');
 
-// Set up initial data.
-// --------------------
+const kittenQueue = new Queue();
+const doggoQueue = new Queue();
 
-const pets = {
-  cats: new Queue(),
-  dogs: new Queue(),
+store.cats.forEach((cat) => kittenQueue.enqueue(cat));
+store.dogs.forEach((dog) => doggoQueue.enqueue(dog));
+
+const CatService = {
+  getCats() {
+    const displayCats = displayQ(kittenQueue);
+    return displayCats;
+  },
+  getFirstCat() {
+    return kittenQueue.peek();
+  },
+  adoptCat() {
+    kittenQueue.dequeue();
+    return kittenQueue;
+  },
 };
 
-store.cats.forEach((cat) => pets.cats.enqueue(cat));
-store.dogs.forEach((dog) => pets.dogs.enqueue(dog));
-
-// --------------------
+const DogService = {
+  getDogs() {
+    const displayDogs = displayQ(doggoQueue);
+    return displayDogs;
+  },
+  getFirstDog() {
+    return doggoQueue.peek();
+  },
+  adoptDog() {
+    doggoQueue.dequeue;
+    return doggoQueue;
+  },
+};
 
 module.exports = {
-  get() {
-    // Return the pets next in line to be adopted.
-    let newPets = {
-      cat: pets.cats.show(),
-      dog: pets.dogs.show(),
-    };
-    return newPets;
-  },
-  getCats() {
-    // Return the pets next in line to be adopted.
-    let newCats = {
-      cat: pets.cats.show(),
-    };
-    return newCats;
-  },
-  getDogs() {
-    // Return the pets next in line to be adopted.
-    let newDogs = {
-      dog: pets.dogs.show(),
-    };
-    return newDogs;
-  },
-
-  dequeue(type) {
-    // Remove a pet from the queue.
-    if (type === 'cat') {
-      return pets.cats.dequeue();
-    }
-    if (type === 'dog') {
-      return pets.dogs.dequeue();
-    }
-  },
+  CatService,
+  DogService,
 };
